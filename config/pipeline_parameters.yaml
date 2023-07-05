@@ -1,5 +1,5 @@
 threads:
-    template_rule: 1
+    typing: 2
 
 mem_gb:
-    template_rule: 1
+    typing: 4
