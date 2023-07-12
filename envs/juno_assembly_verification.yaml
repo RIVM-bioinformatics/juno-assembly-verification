@@ -2,8 +2,7 @@ name: juno_assembly_verification
 channels:
   - bioconda
   - conda-forge
-  - anaconda
-  - defaults
+  - nodefaults
 dependencies:
   - git
   - mamba
