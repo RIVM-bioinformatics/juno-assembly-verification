@@ -2,8 +2,7 @@ name: juno_assembly_verification
 channels:
   - bioconda
   - conda-forge
-  - anaconda
-  - defaults
+  - nodefaults
 dependencies:
   - git
   - mamba
@@ -13,4 +12,4 @@ dependencies:
   - pip
   - openpyxl
   - pip:
-    - "--editable=git+https://github.com/RIVM-bioinformatics/base_juno_pipeline.git@v0.2.9#egg=base_juno"
+    - "--editable=git+https://github.com/RIVM-bioinformatics/juno-library.git@v2.1.1#egg=juno_library"

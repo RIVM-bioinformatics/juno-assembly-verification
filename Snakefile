@@ -24,8 +24,8 @@ with open(sample_sheet) as f:
     SAMPLES = yaml.safe_load(f)
 
 INPUT = config["input_dir"]
-OUT = config["out"]
-
+OUT = config["output_dir"]
+CONFIG_DIR = config["config_dir"]
 
 localrules:
     all,
@@ -44,7 +44,7 @@ localrules:
 ###             BVI verification                 ###
 ####################################################
 
-BVI_SAMPLES = select_samples_per_group("config/verification_criteria_BVI.tsv", SAMPLES) # has to be implemented in main wrapper
+BVI_SAMPLES = select_samples_per_group(CONFIG_DIR + "/verification_criteria_BVI.tsv", SAMPLES) # has to be implemented in main wrapper
 
 # Create empty list and append.
 # If no samples from the input folder are also in the verification table,
@@ -65,7 +65,7 @@ include: "workflow/rules/BVI/verify_accuracy.smk"
 ###             AMR verification                 ###
 ####################################################
 
-AMR_SAMPLES = select_samples_per_group("config/verification_criteria_AMR.tsv", SAMPLES) # has to be implemented in main wrapper
+AMR_SAMPLES = select_samples_per_group(CONFIG_DIR + "/verification_criteria_AMR.tsv", SAMPLES) # has to be implemented in main wrapper
 
 # Create empty list and append.
 # If no samples from the input folder are also in the verification table,
