@@ -53,15 +53,19 @@ BVI_SAMPLES = select_samples_per_group(CONFIG_DIR + "/verification_criteria_BVI.
 # Snakemake will not attempt to make output for this group of samples.
 BVI_OUTPUT = []
 
+analyses = ["assembly", "clean_reads", "id_species", "qc_assembly"]
+
 if len(BVI_SAMPLES) > 0:
     BVI_OUTPUT.append(OUT + "/verification_subreports/verify_accuracy_BVI.tsv")
-    BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_assembly_hashes.txt")
-    BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_clean_reads_hashes.txt")
-    BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_id_species_hashes.txt")
-    BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_qc_assembly_hashes.txt")
+    BVI_OUTPUT.append(expand(OUT + "/verification_subreports/repeatability/summary_{analysis}.txt", analysis=analyses))
+    # BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_assembly_hashes.txt")
+    # BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_clean_reads_hashes.txt")
+    # BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_id_species_hashes.txt")
+    # BVI_OUTPUT.append(OUT + "/verification_subreports/BVI_qc_assembly_hashes.txt")
 
 # Include BVI rules
-include: "workflow/rules/BVI/verify_accuracy.smk"
+include: "workflow/rules/BVI/verify_qc.smk"
+include: "workflow/rules/BVI/generate_hashes.smk"
 
 ####################################################
 ###             AMR verification                 ###
@@ -82,7 +86,7 @@ if len(AMR_SAMPLES) > 0:
 # Include AMR rules
 include: "workflow/rules/AMR/typing.smk"
 include: "workflow/rules/AMR/copy_assemblies.smk"
-include: "workflow/rules/AMR/verify_accuracy.smk"
+include: "workflow/rules/AMR/verify_qc.smk"
 
 ####################################################
 ###             RVP verification                 ###
