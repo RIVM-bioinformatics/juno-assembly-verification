@@ -26,6 +26,8 @@ with open(sample_sheet) as f:
 INPUT = config["input_dir"]
 OUT = config["output_dir"]
 CONFIG_DIR = config["config_dir"]
+REPEAT_1 = config["repeat_1"]
+REPEAT_2 = config["repeat_2"]
 
 localrules:
     all,

@@ -74,7 +74,8 @@ class JunoAssemblyVerificationRun(Pipeline):
         self.user_parameters = {
             "input_dir": str(self.input_dir),
             "output_dir": str(self.output_dir),
-            "repeats": str(self.repeats),
+            "repeat_1": str(self.repeats[0][0].resolve()),
+            "repeat_2": str(self.repeats[0][1].resolve()),
             "reference_dir": str(self.reference_dir),
             "config_dir": str(self.config_dir[0]),
             "use_singularity": str(self.snakemake_args["use_singularity"]),
